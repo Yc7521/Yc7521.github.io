@@ -50,7 +50,6 @@ include | endif
 if | line
 ifdef | error
 ifndef | pragma
-|||
 
 ### 能力
 
@@ -73,7 +72,6 @@ const | float | short | unsigned
 continue | for | signed | void
 default | goto | sizeof | volatile
 do | if | static | while
-|||||
 
 ## 字面量
 
