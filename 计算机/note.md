@@ -1761,3 +1761,5 @@ WHERE some_column=some_value;
 DELETE FROM table_name
 WHERE some_column=some_value;
 ```
+
+[问题反馈](https://github.com/Yc7521/Yc7521.github.io/issues/1)
