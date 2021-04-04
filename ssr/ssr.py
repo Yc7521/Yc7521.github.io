@@ -106,11 +106,11 @@ def parse(txt):
 
 if __name__ == '__main__':
     urls = []
-    with open('ssr/ssr.txt') as f:
+    with open('ssr/ssr.raw.txt') as f:
         for i in f:
             a = parse(i)
             a.setdefault("group", "xxx")
             urls.append(to_ssr(a))
     urls = encode("\n".join(urls))
-    with open('ssr/ssr', 'w') as o:
+    with open('ssr/ssr.txt', 'w') as o:
         o.write(urls)
