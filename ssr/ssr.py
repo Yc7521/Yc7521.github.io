@@ -77,7 +77,7 @@ def to_ssr(dict: dict):
     if len(params) > 0:
         txt += '/?'
     txt += '&'.join(params)
-    return 'ssr://' + fill(encode(txt))
+    return 'ssr://' + encode(txt)
 
 
 def ss_parse(txt):
