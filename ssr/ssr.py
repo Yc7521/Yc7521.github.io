@@ -114,3 +114,4 @@ if __name__ == '__main__':
     urls = encode("\n".join(urls))
     with open('ssr/ssr.txt', 'w') as o:
         o.write(urls)
+        o.write("\n")
