@@ -110,7 +110,9 @@ if __name__ == '__main__':
         for i in f:
             a = parse(i)
             a.setdefault("group", "xxx")
-            urls.append(to_ssr(a))
+            urls.append(a)
+    urls.sort(key=lambda a: a['ip'])
+    urls = [to_ssr(i) for i in urls]
     urls = encode("\n".join(urls))
     with open('ssr/ssr.txt', 'w') as o:
         o.write(urls)
