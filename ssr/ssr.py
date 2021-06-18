@@ -106,9 +106,9 @@ def parse(txt):
 
 if __name__ == '__main__':
     urls = []
-    with open('ssr/ssr.raw.txt') as f:
+    with open('ssr/ssr.raw.txt', encoding='utf-8') as f:
         for i in f:
-            a = parse(i)
+            a = parse(i.strip())
             a.setdefault("group", "xxx")
             urls.append(a)
     urls.sort(key=lambda a: a['ip'])
