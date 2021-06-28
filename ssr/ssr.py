@@ -101,18 +101,23 @@ def parse(txt):
         return ssr_parse(txt.replace('ssr://', ''))
     if 'ss://' in txt:
         return ss_parse(txt.replace('ss://', ''))
-    raise Exception('ss url or ssr url format error.')
+    raise Exception('ss url or ssr url format error.', txt)
 
 
 if __name__ == '__main__':
     urls = []
     with open('ssr/ssr.raw.txt', encoding='utf-8') as f:
         for i in f:
-            a = parse(i.strip())
+            t = i.strip()
+            if len(t) == 0:
+                continue
+            a = parse(t)
             a.setdefault("group", "xxx")
+            a['group'] = "xxx"
             urls.append(a)
     urls.sort(key=lambda a: a['ip'])
     urls = [to_ssr(i) for i in urls]
+    # print(urls)
     urls = encode("\n".join(urls))
     with open('ssr/ssr.txt', 'w') as o:
         o.write(urls)
