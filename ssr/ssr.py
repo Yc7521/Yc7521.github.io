@@ -2,6 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 import base64
+import demjson as json
+import pyperclip as pc
 
 '''
 A method of decoding ss url and ssr url.
@@ -22,11 +24,11 @@ def clear_ss(deb64):
     return deb64[:pos] if pos > 0 else deb64
 
 
-def decode(txt: str):
+def decode(txt: str) -> str:
     return bytes.decode(base64.urlsafe_b64decode(fill(txt)))
 
 
-def encode(txt: str):
+def encode(txt: str) -> str:
     return base64.urlsafe_b64encode(txt.encode()).decode().rstrip('=')
 
 
@@ -52,9 +54,9 @@ def ssr_parse(txt):
 
 
 def to_ssr(dict: dict):
-    txt = dict["ip"] + ':' + dict["port"] + ':' + dict["protocol"] + \
+    txt = dict["ip"] + ':' + str(dict["port"]) + ':' + dict["protocol"] + \
         ':' + dict["method"] + ':' + dict["obfs"] + \
-        ':' + encode(dict["password"])
+        ':' + encode(str(dict["password"]))
     obfsparam = dict.get('obfsparam')
     protoparam = dict.get('protoparam')
     remarks = dict.get('remarks')
@@ -104,7 +106,7 @@ def parse(txt):
     raise Exception('ss url or ssr url format error.', txt)
 
 
-if __name__ == '__main__':
+def read4raw():
     urls = []
     with open('ssr/ssr.raw.txt', encoding='utf-8') as f:
         for i in f:
@@ -112,13 +114,40 @@ if __name__ == '__main__':
             if len(t) == 0:
                 continue
             a = parse(t)
-            a.setdefault("group", "xxx")
-            a['group'] = "xxx"
+            if 'group' in a:
+                del a['group']
+            if 'obfsparam' not in a:
+                a['obfsparam'] = ""
             urls.append(a)
-    urls.sort(key=lambda a: a['ip'])
-    urls = [to_ssr(i) for i in urls]
-    # print(urls)
-    urls = encode("\n".join(urls))
+    return urls
+
+
+def read4json():
+    urls = []
+    with open('ssr/ssr.json', encoding='utf-8') as f:
+        urls = json.decode("\n".join(f.readlines()))
+    return urls
+
+
+def save2json(urls):
+    with open('ssr/ssr.json', 'w', encoding='utf-8') as f:
+        f.write(json.encode(urls))
+
+
+def save2sub(urls):
     with open('ssr/ssr.txt', 'w') as o:
         o.write(urls)
         o.write("\n")
+
+
+if __name__ == '__main__':
+    # urls = read4raw()
+    urls = read4json()
+    urls.sort(key=lambda a: a['ip'])
+    # save2json(urls)
+    for i in urls:
+        i['group'] = "xxx"
+
+    urls = [to_ssr(i) for i in urls]
+    urls = encode("\n".join(urls))
+    save2sub(urls)
