@@ -119,6 +119,7 @@ def read4raw():
             if 'obfsparam' not in a:
                 a['obfsparam'] = ""
             urls.append(a)
+    urls.sort(key=lambda a: a['ip'])
     return urls
 
 
@@ -126,6 +127,7 @@ def read4json():
     urls = []
     with open('ssr/ssr.json', encoding='utf-8') as f:
         urls = json.decode("\n".join(f.readlines()))
+    urls.sort(key=lambda a: a['ip'])
     return urls
 
 
@@ -134,20 +136,34 @@ def save2json(urls):
         f.write(json.encode(urls))
 
 
+def save2raw(urls):
+    with open('ssr/ssr.out.txt', 'w', encoding='utf-8') as f:
+        f.writelines([to_ssr(i)+"\n" for i in urls])
+
+
 def save2sub(urls):
-    with open('ssr/ssr.txt', 'w') as o:
-        o.write(urls)
-        o.write("\n")
+    urls = [to_ssr(i) for i in urls]
+    code = encode("\n".join(urls))
+    with open('ssr/ssr.txt', 'w', encoding='utf-8') as f:
+        f.write(code)
+        f.write("\n")
+
+
+def distinct(urls):
+    m = dict()
+    for i in urls:
+        m[i['ip'] + i["port"]] = i
+    return m.values()
 
 
 if __name__ == '__main__':
     # urls = read4raw()
     urls = read4json()
-    urls.sort(key=lambda a: a['ip'])
+    urls = distinct(urls)
+
     # save2json(urls)
+    # save2raw(urls)
     for i in urls:
         i['group'] = "xxx"
 
-    urls = [to_ssr(i) for i in urls]
-    urls = encode("\n".join(urls))
     save2sub(urls)
