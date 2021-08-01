@@ -157,8 +157,8 @@ def distinct(urls):
 
 
 if __name__ == '__main__':
-    # urls = read4raw()
-    urls = read4json()
+    # urls = read4json()
+    urls = read4raw()
     urls = distinct(urls)
 
     # save2json(urls)
