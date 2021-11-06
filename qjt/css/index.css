@@ -1,0 +1,241 @@
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:16px;
+    vertical-align:baseline;
+    background:transparent;
+    box-sizing:border-box;
+}
+body {
+    line-height:1;
+}
+
+:focus {
+    outline: 1;
+}
+
+article,aside,canvas,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section,summary {
+    display:block;
+}
+
+ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    border:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted #000;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+
+.mobile-wrap{
+    width: 100%;
+    background: #f7f7f7;
+    padding: 0.8rem;
+    box-sizing: border-box;
+}
+.mobile-card{
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 4px 10px 0 rgba(226,234,242,.6);
+    box-shadow: 0 4px 10px 0 rgba(226,234,242,.6);
+    padding: 1rem;
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
+}
+.min-height{
+    height: 150px;
+}
+.max-height{
+    height: 600px;
+}
+.other-height{
+    height: 800px;
+    position: relative;
+}
+.card-title{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.num-text{
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+#xsxxEchard,#bzrcsEchart,#fdyshEchart,#zzfxEchart,#gxrsqrs,#xscfd,#fxrq,#fxjtfs,#rxsdtj,#btxmrx{
+    width: 100%;
+    height: 510px;
+}
+#xxsj {
+    width: 100%;
+    margin-top: 2rem;
+    overflow-x: auto;
+}
+#xxsj .xxsjTable {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+#xxsj .xxsjTable th, #xxsj .xxsjTable td {
+    white-space: nowrap;
+    color: #5e6d82;
+    font-weight: 400;
+    font-size: 1.0rem;
+    text-align: center;
+    background: #e4ebf6;
+    border-color: #d7dce6;
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0 1rem;
+}
+#xxsj .xxsjTable th.active{
+    color: #248af9;
+}
+#xxsj .xxsjTable tr:nth-child(odd) td {
+    background-color: #f7f8fa;
+}
+#xxsj .xxsjTable th .name {
+    line-height: 6rem;
+    font-size: 1.0rem;
+}
+#xxsj .xxsjTable th .icon {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2px;
+}
+#xxsj .xxsjTable th .icon i{
+    font-size: 1rem;
+}
+#xxsj .xxsjTable .mwidth {
+    max-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#xxsj .xxsjTable tr:nth-child(even) td {
+    background-color: #fff;
+}
+#xxsj .xxsjTable .canclick {
+    color: #248af9;
+}
+.all-xxsj{
+    width: 100%;
+    height: 5rem;
+    line-height: 5rem;
+    text-align: center;
+    font-size: 1.0rem;
+    color: #248af9;
+    /*新增*/
+    position: relative;
+    z-index: 1;
+}
+.closeBtn{
+    position: absolute;
+    font-size: 2.5rem;
+    right: 20px;
+    top: 1px;
+    display: none;
+}
+
+.page-btn{
+    height: 6rem;
+    line-height: 4rem;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+    opacity: 0;
+}
+.page-btn div i{
+    font-size: 1.0rem;
+}
+.page-btn div span{
+    font-size: 1.0rem;
+}
+.page-next{
+    margin-left: auto;
+}
+.jcalendar_week{
+    margin-top: 2rem;
+}
+.mrqjry-content{
+    padding: 0rem;
+    font-size: 1.5rem;
+    color: #999;
+    line-height: 4rem;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height:380px;
+}
