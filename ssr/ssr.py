@@ -116,6 +116,7 @@ def read4raw():
             a = parse(t)
             if 'group' in a:
                 del a['group']
+                del a['remarks']
             if 'obfsparam' not in a:
                 a['obfsparam'] = ""
             urls.append(a)
