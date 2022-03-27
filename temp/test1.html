@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-secondary">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark bg-opacity-75 ps-3 pe-3">
+    <a class="navbar-brand" href="#">Test</a>
+    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+      aria-expanded="false" aria-label="切换导航">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link 2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link 3</a>
+        </li>
+      </ul>
+    </div> -->
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3 p-3 bg-dark opacity-50 overflow-auto" id="dir" name="dir">
+        <nav class="navbar justify-content-center">
+          <ul class="navbar-nav">
+            <li class="nav-item m-3">
+              <a class="nav-link" href="#">Page 1</a>
+            </li>
+            <li class="nav-item m-3">
+              <a class="nav-link" href="#">Page 2</a>
+            </li>
+            <li class="nav-item m-3">
+              <a class="nav-link" href="#">Page 3</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="col-9 p-3">
+        <header>
+          <h1 class="text-center" id="title" name="title">Page 1</h1>
+          <hr>
+        </header>
+
+        <div class="row" id="content" name="content">
+        </div>
+
+        <footer>
+          <hr>
+          <p class="text-center opacity-75" style="font-size: 8px;">Copyright &copy; 2022</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    let pages = [
+      '<div class="col-12"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, nostrum eligendi! Asperiores provident adid explicabo perspiciatis laborum quidem? Eos expedita ullam aperiam mollitia ab quidem accusantium itaqueimpedit officia?</p><p>Odio numquam reiciendis in accusantium corrupti error nam odit, aperiam dolorum natus dicta animicupiditate. Quo sapiente veritatis velit eaque sunt? Est, adipisci? Voluptatibus doloremque dolor magnidebitis natus quaerat.</p><p>Itaque ipsam omnis vitae quasi laboriosam corrupti veritatis repudiandae adipisci eligendi, magnam neque,iure qui alias similique corporis? Minima fugit consectetur, mollitia eligendi officia vitae doloribusdeleniti aut unde aliquid?</p><p>Consequatur nulla sequi eum ipsum, natus esse eligendi voluptates tenetur, architecto inciduntdoloremque. Quidem obcaecati assumenda pariatur quos? Repellat ipsam ad minima corporis blanditiis quaeratofficiis sed officia vero. Amet?</p>',
+      '<div class="col-12"><p>Fugit commodi nisi cupiditate culpa quos qui facere recusandae, quae amet voluptatibus veniam voluptatesaccusantium perspiciatis asperiores provident illum laudantium incidunt autem quibusdam omnis ullamdolores laboriosam ab. Incidunt, nihil!</p><p>Sint nesciunt amet debitis, libero provident quasi, neque nobis enim officiis totam corrupti animicommodi ratione incidunt beatae! Illo quam quaerat harum perferendis temporibus consequatur iure?Pariatur, excepturi. Asperiores, porro.</p><p>Culpa veniam, ea unde commodi dolorum, sint nesciunt aliquam nulla reiciendis sequi voluptatum quodincidunt excepturi dicta voluptates. Minus dolorum tempore reprehenderit, totam rem a at. Nulla aspernaturfacilis rem!</p></div>',
+    ];
+
+    let dir = document.getElementById('dir');
+    let title = document.getElementById('title');
+    let content = document.getElementById('content');
+
+    let page = 1;
+
+    function chagePage(p) {
+      page = p;
+      dir.innerHTML = '';
+      content.innerHTML = '';
+      for (let i = 0; i < pages.length; i++) {
+        let li = document.createElement('li');
+        li.className = 'nav-item m-3';
+        let a = document.createElement('a');
+        a.className = 'nav-link';
+        a.href = '#';
+        a.innerHTML = 'Page ' + (i + 1);
+        a.onclick = function () {
+          chagePage(i + 1);
+        };
+        li.appendChild(a);
+        dir.appendChild(li);
+      }
+      title.innerHTML = 'Page ' + page;
+      content.innerHTML = pages[page - 1];
+    }
+
+    chagePage(1);
+  </script>
+
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
