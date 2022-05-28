@@ -232,9 +232,7 @@ response:
 
 ``` json
 {
-  "id": 1,
-  "name": "张三",
-  "age": 20
+  "msg": "success"
 }
 ```
 
@@ -310,7 +308,7 @@ public class Servlet extends HttpServlet {
 
 > SpringMVC 定义 API、参数接收、数据响应。
 
-``` JAVA
+``` java
 // 定义 API
 @Controller
 public class Controller {
@@ -329,38 +327,80 @@ public class Controller {
 > 使用 Jdbc进行数据查询的实现方式。
 
 ``` java
-// 数据查询
-@RequestMapping(value = "/url", method = RequestMethod.GET)
-public void doGet(HttpServletRequest req, HttpServletResponse resp) {
-  try {
-    // 接收参数
-    String name = req.getParameter("name");
-    String age = req.getParameter("age");
-    // 数据响应
-    resp.setContentType("text/plain;charset=utf-8");
-```
+// 1、创建jdbc参数
+String driver = "com.mysql.jdbc.Driver";
+String url = "jdbc:mysql://localhost:3306/jdbc";
+String username = "root";
+String password = "123456";
+// 2、加载驱动
+try {
+  Class.forName(driver);
+  // 3、创建连接
+  Connection conn = DriverManager.getConnection(url, username, password);
+  // 4、创建执行命令
+  PreparedStatement stmt = conn.prepareStatement("select * from clazz where name = ?");
+  // 5、创建SQL命令
+  stmt.setString(1, "java");
+  // 6、执行SQL命令
+  ResultSet rs = stmt.executeQuery();
+  // 7、处理结果
+  if (rs.next()) {
+    System.out.println("查询结果为");
+    System.out.println("name:" + rs.getString("name"));
+    System.out.println("age:" + rs.getString("age"));
+  } else {
+    System.out.println("查询失败");
+  }
+  // 关闭资源
+  stmt.close();
+  conn.close();
 
-> 使用 Jdbc进行数据查询的实现方式。
-
-``` JAVA
-
+} catch (Exception e) {
+  e.printStackTrace();
+}
 ```
 
 > 使用 Mybatis 进行数据新增的实现方式。
 
-``` JAVA
+``` java
+// 编写 Mapper 接口
+@Mapper
+public interface MovieInfoMapper {
+  // 新增
+  // 参数：MovieInfo对象
+  // 编写 注解 @Insert 指定 SQL 语句
+  // 注解 @Options 指定插入数据的自增主键(返回值)
+  @Insert("insert into movie_info(`name`, movie_year)\n" +
+          "values (#{movieName}, #{movieYear})")
+  @Options(useGeneratedKeys = true, keyProperty = "movieId", keyColumn = "movieId")
+  Integer publishMovie(MovieInfo movieInfo);
+}
 
+// 于 Service 层进行数据操作
+// 注入
+@Autowired
+private MovieInfoMapper movieInfoMapper;
+// 编写方法
+public MovieInfo publishMovieInfo(MovieInfo movieInfo) {
+  final Integer result = movieInfoMapper.publishMovie(movieInfo);
+  if (result > 0) {
+    return movieInfo;
+  }
+  return null;
+}
 ```
 
 > Springboot自定义配置的使用。
 
-``` JAVA
+不想写.jpg
+
+``` java
 
 ```
 
 > 使用 Spring Aop 进行切点定义与通知接收。
 
-``` JAVA
+``` java
 
 ```
 
@@ -371,3 +411,36 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 1、理解案例场景进行数据库结构的设计，包括数据表对象设计、表字段设计、表间关联关系设计。（10 分）  
 2、理解案例场景进行 API 设计，包括访问方式、路由、输入参数、返回类型、异常处理。（10 分）  
 3、案例场景的实现思路描述。（10 分）  
+
+### 答题思路
+
+#### 数据库
+
+分析数据属性 组表
+分析关系 添加关系(外键)
+稍微画个er图之类的就差不多了
+
+#### api设计
+
+分析数据的增删改查 挨个写就完事了
+
+访问方式、路由
+
+- 增: POST, /api/movie
+- 删: DELETE, /api/movie/{id}
+- 改: PUT, /api/movie/
+- 查: GET, /api/movie/{id}
+
+参数及返回值
+
+- 增: 除了id其他都是参数，返回值是所有字段
+- 删: id，返回值是是否成功
+- 改: 所有字段，返回值是是否成功
+- 查:
+  - 无，返回值是列表
+  - id，返回值是所有字段
+
+异常随便扯，未查询到数据 权限 数据格式错误等
+
+思路部分字数水够就行
+比如 用户先登录，然后再增删改查 等等
