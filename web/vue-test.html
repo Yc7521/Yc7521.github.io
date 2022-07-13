@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Test</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.0-beta1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="app" class="container mt-3" :style="{color: theme.text.color}">
+    <div class="row mt-md-3 mb-md-3 justify-content-between">
+      <div class="col-8 col-md-10">
+        <h3>{{title}}</h3>
+      </div>
+      <div class="col-auto">
+        <label for="theme">theme: </label>
+        <select id="theme" name="theme" v-model="themeName" @change="update"
+          style="border: none; border-radius: 10px; padding: 2px;"
+          :style="{backgroundColor: theme.input.background, color:theme.input.color}">
+          <option v-for="theme in themeArr" :value="theme">
+            {{ theme }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <ul class="nav nav-tabs" id="nav" :style="{borderColor: theme.menu.border}">
+          <li v-for="m in menu" class="nav-item">
+            <a :class="menuClass(m)" :style="menuStyle(m)" @click="currMenu = m" href="#">{{m}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 content" id="content">
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit, ipsa?</p>
+        <p>Blanditiis, ipsa architecto modi ut sed ullam facilis voluptates nesciunt?</p>
+        <p>Suscipit soluta sapiente vitae dicta. Voluptatum eveniet odit mollitia ratione?</p>
+        <p>Laudantium illum accusamus nisi. Necessitatibus aut ipsam ut autem accusamus.</p>
+        <p>Praesentium officiis repudiandae, eligendi ullam ex quam sed aperiam. Nihil.</p>
+        <p>Tenetur perferendis reiciendis eaque nihil placeat, nam in illum voluptatibus?</p>
+        <p>Ullam iure tempore quis pariatur veniam inventore? Recusandae, reprehenderit optio.</p>
+        <p>Quisquam ullam doloribus soluta quibusdam, quaerat atque recusandae alias fuga.</p>
+        <p>Quas ex officia voluptatem, perspiciatis corporis ipsa sunt natus laborum.</p>
+        <p>Labore veritatis inventore ipsum adipisci molestiae nisi necessitatibus ullam harum?</p>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.0-beta1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.4/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      title: "hello vue.js",
+      menu: [
+        "首页",
+        "简介",
+        "信息",
+      ],
+      currMenu: "首页",
+      themeName: "",
+      theme: {
+        "text": {
+          "color": "#000000",
+          "background": "#ffffff",
+        },
+        "menu": {
+          "color": "#616161",
+          "background": "#ffffff",
+          "active": "#007acc",
+          "border": "#61616130",
+        },
+        "input": {
+          "color": "#616161",
+          "background": "#ffffff",
+        },
+      },
+      themeArr: [],
+      themeDef: {
+        "light": {
+          "text": {
+            "color": "#000000",
+            "background": "#ffffff",
+          },
+          "menu": {
+            "color": "#616161",
+            "background": "#ffffff",
+            "active": "#007acc",
+            "border": "#61616130",
+          },
+          "input": {
+            "color": "#616161",
+            "background": "#ffffff",
+          },
+        },
+        "dark": {
+          "text": {
+            "color": "#abb2bf",
+            "background": "#282c34",
+          },
+          "menu": {
+            "color": "#abb2bf",
+            "background": "#21252b",
+            "active": "#4d78cc",
+            "border": "#343a45",
+          },
+          "input": {
+            "color": "#abb2bf",
+            "background": "#1d1f23",
+          },
+        },
+      }
+    },
+    methods: {
+      update: function () {
+        this.theme = this.themeDef[this.themeName];
+        document.body.style.background = this.theme.text.background;
+      },
+      menuClass: function (menu) {
+        return {
+          "active": this.currMenu == menu,
+          "nav-link": true,
+        };
+      },
+      menuStyle: function (menu) {
+        return this.currMenu == menu ? this.activeStyle : {
+          "color": this.theme.text.color,
+        };
+      },
+    },
+    computed: {
+      activeStyle: function () {
+        return {
+          "color": this.theme.menu.active,
+          "backgroundColor": this.theme.menu.background,
+          "borderColor": this.theme.menu.border,
+        };
+      },
+    },
+    created: function () {
+      this.themeArr = Object.keys(this.themeDef);
+      this.themeName = this.themeArr[0];
+      console.log('this.themeArr :>> ', this.themeArr);
+      console.log('this.themeName :>> ', this.themeName);
+    },
+    mounted: function () {
+      this.update();
+    },
+  });
+</script>
+
+</html>
