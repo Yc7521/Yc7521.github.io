@@ -1249,8 +1249,8 @@
         d2 = document.getElementById('i6').value,
         time1 = document.getElementById('i7').value,
         time2 = document.getElementById('i8').value,
-        date1 = new Date(d1 + " " + time1),
-        date2 = new Date(d2 + " " + time2);
+        date1 = new Date(d1 + "T" + time1),
+        date2 = new Date(d2 + "T" + time2);
       return [date1, date2];
     }
     function copy(src, dest) {
