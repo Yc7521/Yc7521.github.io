@@ -397,7 +397,7 @@
                               </div>
                               <div class="mint-cell-value mt-color-grey-lv3"
                                 style="flex: 1 1 calc(100% - 96px); justify-content: normal;">
-                                <div id="s_addr" class="em-select-value mt-color-grey-lv3">筠竹苑1栋302</div>
+                                <div id="s_addr" class="em-select-value mt-color-grey-lv3">仙林校区筠竹苑1栋302室</div>
                               </div>
                               <!---->
                             </div>
@@ -574,7 +574,8 @@
                               </div>
                               <div class="mint-cell-value mt-color-grey-lv3"
                                 style="flex: 1 1 calc(100% - 96px); justify-content: normal;">
-                                <div data-v-01cabbf9="" class="em-select-value mt-color-grey-lv3">是</div>
+                                <div id="stay-school" data-v-01cabbf9="" class="em-select-value mt-color-grey-lv3">是
+                                </div>
                               </div>
                               <!---->
                             </div>
@@ -1167,7 +1168,7 @@
       </div>
       <div class="input-group">
         <label class="input-group-addon" for="i20">住宿地址</label>
-        <input class="form-control" type="text" name="i20" id="i20" value="筠竹苑1栋302">
+        <input class="form-control" type="text" name="i20" id="i20" value="仙林校区筠竹苑1栋302室4号床">
       </div>
       <div class="input-group">
         <label class="input-group-addon" for="i5">请假时间</label>
@@ -1364,6 +1365,8 @@
         // set day_ge2 3 hidden
         document.getElementById('day_ge2').style.display = 'none';
         document.getElementById('day_ge3').style.display = 'none';
+      } else {
+        document.getElementById('stay-school').innerText = '否';
       }
       if (day.innerText == '2') {
         // set day_ge3 hidden
